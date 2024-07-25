@@ -8,7 +8,7 @@
             "description": "The list of numbers to add up.",
             "type": "string",
             "prefill": "https://www.ibrahimboussaa.com",
-            "editor": "json"
+            "editor": "textfield"
         }
     },
     "required": [
