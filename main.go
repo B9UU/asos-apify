@@ -47,13 +47,14 @@ func NewScraper() (*Scraper, error) {
 
 func main() {
 	log.Println("Example actor written in Go.")
-	_, err := NewScraper()
+	scrp, err := NewScraper()
 	if err != nil {
 		log.Fatal(err)
 	}
-	_, err = http.Get("https://www.ibrahimboussaa.com")
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
+	fmt.Println(scrp.Payload.Url)
+	// _, err = http.Get("https://www.ibrahimboussaa.com")
+	// if err != nil {
+	// 	log.Fatal(err)
+	// 	return
+	// }
 }
