@@ -8,6 +8,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/joho/godotenv"
 )
 
 type Payload struct {
@@ -35,7 +37,8 @@ func (i *Scraper) Input() error {
 }
 
 func (i *Scraper) Output() error {
-	url := fmt.Sprintf("https://api.apify.com/v2/datasets/%s", i.DatasetId)
+	url := fmt.Sprintf("https://api.apify.com/v2/datasets/%s/items", i.DatasetId)
+	fmt.Println(url)
 	body, err := json.Marshal(i)
 	if err != nil {
 		return err
@@ -66,6 +69,10 @@ func NewScraper() (*Scraper, error) {
 }
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal(err)
+	}
 	log.Println("Example actor written in Go.")
 	scrp, err := NewScraper()
 	if err != nil {
