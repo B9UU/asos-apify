@@ -1,24 +1,24 @@
 {
-    "title": "Golang apify test",
+    "title": "Asos.com Scraper",
     "type": "object",
     "schemaVersion": 1,
     "properties": {
         "search_query": {
-            "title": "search query",
+            "title": "search_query",
             "description": "search you need to scrape",
             "type": "string",
             "prefill": "top",
             "editor": "textfield"
         },
         "start": {
-            "title": "from which item you want to start collecting data",
+            "title": "start",
             "description": "if start not provide all products will get scraped",
             "type": "integer",
             "minimum": 0,
             "default": 0
         },
         "last_item": {
-            "title": "the item will stop at",
+            "title": "last_item",
             "description": "the last item will stop at if not provided will scrape all products available in the search query",
             "type": "integer",
             "minimum": 1
