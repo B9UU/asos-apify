@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 )
 
 type Payload struct {
@@ -36,14 +37,11 @@ func (i *Scraper) Input() error {
 
 func (i *Scraper) Output() error {
 	url := fmt.Sprintf("https://api.apify.com/v2/datasets/%s/items?token=%s", i.DatasetId, i.Token)
-	fmt.Println(url)
-	dd := []*Scraper{i}
-	body, err := json.Marshal(dd)
-	if err != nil {
-		return err
-	}
-	fmt.Println(body)
-	req, err := http.NewRequest(http.MethodPost, url, bytes.NewBuffer(body))
+	// body, err := json.Marshal(dd)
+	// if err != nil {
+	// 	return err
+	// }
+	req, err := http.NewRequest(http.MethodPost, url, strings.NewReader(`["laqo":"test"]`))
 	if err != nil {
 		return err
 	}
