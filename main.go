@@ -8,8 +8,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-
-	"github.com/joho/godotenv"
 )
 
 type Payload struct {
@@ -69,10 +67,10 @@ func NewScraper() (*Scraper, error) {
 }
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal(err)
-	}
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 	log.Println("Example actor written in Go.")
 	scrp, err := NewScraper()
 	if err != nil {
