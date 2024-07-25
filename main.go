@@ -48,6 +48,7 @@ func (i *Scraper) Output() error {
 	if err != nil {
 		return err
 	}
+	fmt.Println(resp.StatusCode, "response")
 	defer resp.Body.Close()
 	return nil
 }
