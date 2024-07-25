@@ -35,7 +35,7 @@ func (i *Scraper) Input() error {
 }
 
 func (i *Scraper) Output() error {
-	url := fmt.Sprintf("https://api.apify.com/v2/key-value-stores/%s/records/OUTPUT?token=%s", i.Key, i.Token)
+	url := fmt.Sprintf("https://api.apify.com/v2/datasets/%s", i.DatasetId)
 	body, err := json.Marshal(i)
 	if err != nil {
 		return err
@@ -50,7 +50,6 @@ func (i *Scraper) Output() error {
 	}
 	defer resp.Body.Close()
 	return nil
-
 }
 
 func NewScraper() (*Scraper, error) {
