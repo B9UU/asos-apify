@@ -3,15 +3,28 @@
     "type": "object",
     "schemaVersion": 1,
     "properties": {
-        "url": {
-            "title": "url",
-            "description": "The list of numbers to add up.",
+        "search_query": {
+            "title": "search query",
+            "description": "search you need to scrape",
             "type": "string",
-            "prefill": "https://www.ibrahimboussaa.com",
+            "prefill": "top",
             "editor": "textfield"
+        },
+        "start": {
+            "title": "from which item you want to start collecting data",
+            "description": "if start not provide all products will get scraped",
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+        },
+        "last_item": {
+            "title": "the item will stop at",
+            "description": "the last item will stop at if not provided will scrape all products available in the search query",
+            "type": "integer",
+            "minimum": 1
         }
     },
     "required": [
-        "url"
+        "search_query"
     ]
 }
