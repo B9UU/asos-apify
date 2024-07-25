@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -13,8 +14,9 @@ type Payload struct {
 	Url string `json:"url"`
 }
 type Scraper struct {
-	Key   string
-	Token string
+	Key       string
+	Token     string
+	DatasetId string
 	Payload
 }
 
@@ -32,10 +34,29 @@ func (i *Scraper) Input() error {
 
 }
 
+func (i *Scraper) Output() error {
+	url := fmt.Sprintf("https://api.apify.com/v2/key-value-stores/%s/records/OUTPUT?token=%s", i.Key, i.Token)
+	body, err := json.Marshal(i)
+	if err != nil {
+		return err
+	}
+	req, err := http.NewRequest(http.MethodPut, url, bytes.NewBuffer(body))
+	if err != nil {
+		return err
+	}
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+	return nil
+
+}
+
 func NewScraper() (*Scraper, error) {
 	scrp := Scraper{}
-	scrp.Key, scrp.Token = os.Getenv("APIFY_DEFAULT_KEY_VALUE_STORE_ID"), os.Getenv("APIFY_TOKEN")
-	if scrp.Key == "" || scrp.Token == "" {
+	scrp.Key, scrp.Token, scrp.DatasetId = os.Getenv("APIFY_DEFAULT_KEY_VALUE_STORE_ID"), os.Getenv("APIFY_TOKEN"), os.Getenv("APIFY_DEFAULT_DATASET_ID")
+	if scrp.Key == "" || scrp.Token == "" || scrp.DatasetId == "" {
 		return nil, errors.New("Missing required env vars")
 	}
 	err := scrp.Input()
@@ -52,9 +73,6 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println(scrp.Payload.Url)
-	// _, err = http.Get("https://www.ibrahimboussaa.com")
-	// if err != nil {
-	// 	log.Fatal(err)
-	// 	return
-	// }
+	err = scrp.Output()
+	fmt.Println(scrp)
 }
