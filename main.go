@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"sync"
 )
 
 type Payload struct {
@@ -130,9 +131,26 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	data, err := Asos("top", "0", "200")
-	if err != nil {
-		log.Fatal(err)
+	var wg sync.WaitGroup
+	ch := make(chan struct{}, 10)
+	for i := scrp.Offset; i < scrp.Max; i += 200 {
+		// for i := 0; i < 300; i += 200 {
+		wg.Add(1)
+		ch <- struct{}{}
+		go func(i int) {
+			defer func() {
+				wg.Done()
+				<-ch
+			}()
+			data, err := Asos("top", fmt.Sprint(i), "200")
+			if err != nil {
+				log.Println(err)
+			}
+			err = scrp.Output(data)
+			if err != nil {
+				log.Println(err)
+			}
+		}(i)
 	}
-	err = scrp.Output(data)
+	wg.Wait()
 }
