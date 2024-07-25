@@ -1,0 +1,17 @@
+{
+    "title": "Golang apify test",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "url": {
+            "title": "url",
+            "description": "The list of numbers to add up.",
+            "type": "string",
+            "prefill": "https://www.ibrahimboussaa.com",
+            "editor": "json"
+        }
+    },
+    "required": [
+        "numbers"
+    ]
+}
