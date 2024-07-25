@@ -41,7 +41,7 @@ func (i *Scraper) Output() error {
 	if err != nil {
 		return err
 	}
-	req, err := http.NewRequest(http.MethodPut, url, bytes.NewBuffer(body))
+	req, err := http.NewRequest(http.MethodPost, url, bytes.NewBuffer(body))
 	if err != nil {
 		return err
 	}
