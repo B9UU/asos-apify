@@ -35,7 +35,7 @@ func (i *Scraper) Input() error {
 }
 
 func (i *Scraper) Output() error {
-	url := fmt.Sprintf("https://api.apify.com/v2/datasets/%s/items", i.DatasetId)
+	url := fmt.Sprintf("https://api.apify.com/v2/datasets/%s/items?token=%s", i.DatasetId, i.Token)
 	fmt.Println(url)
 	body, err := json.Marshal(i)
 	if err != nil {
