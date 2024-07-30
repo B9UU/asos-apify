@@ -5,5 +5,5 @@ COPY . .
 
 RUN go mod download
 
-RUN go build -o /example-actor
-CMD ["/example-actor"]
+RUN go build -o /asos-scraper
+CMD ["asos-scraper"]

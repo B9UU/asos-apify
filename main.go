@@ -22,6 +22,7 @@ type Scraper struct {
 	Key       string
 	Token     string
 	DatasetId string
+	Items     int
 	Payload
 }
 
@@ -42,7 +43,6 @@ func (i *Scraper) Input() error {
 // TODO: need to handle payload more than 5MB
 func (i *Scraper) Output(data AsosResp) error {
 	url := fmt.Sprintf("https://api.apify.com/v2/datasets/%s/items?token=%s", i.DatasetId, i.Token)
-	fmt.Println("Number of Items: ", data.ItemCount)
 
 	dataM, err := json.Marshal(data.Products)
 	if err != nil {
@@ -66,7 +66,13 @@ func (i *Scraper) Output(data AsosResp) error {
 	defer resp.Body.Close()
 	if resp.StatusCode != 201 {
 		fmt.Println("ERROR: unable to add to dataset: ", string(dd))
+		return nil
 	}
+	for _, d := range dataM {
+		fmt.Printf("%+v\n", d)
+	}
+	i.Items += len(dataM)
+	fmt.Println(i.Items, "Items Exported")
 	return nil
 }
 
@@ -126,7 +132,6 @@ func Asos(q, offset, limit string) (AsosResp, error) {
 }
 
 func main() {
-	log.Println("Example actor written in Go.")
 	scrp, err := NewScraper()
 	if err != nil {
 		log.Fatal(err)
