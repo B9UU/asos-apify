@@ -41,7 +41,7 @@ func (i *Scraper) Input() error {
 }
 
 // TODO: need to handle payload more than 5MB
-func (i *Scraper) Output(data AsosResp) error {
+func (i Scraper) Output(data AsosResp) error {
 	url := fmt.Sprintf("https://api.apify.com/v2/datasets/%s/items?token=%s", i.DatasetId, i.Token)
 
 	dataM, err := json.Marshal(data.Products)
@@ -68,10 +68,10 @@ func (i *Scraper) Output(data AsosResp) error {
 		fmt.Println("ERROR: unable to add to dataset: ", string(dd))
 		return nil
 	}
-	for _, d := range dataM {
+	for _, d := range data.Products {
 		fmt.Printf("%+v\n", d)
 	}
-	i.Items += len(dataM)
+	i.Items += len(data.Products)
 	fmt.Println(i.Items, "Items Exported")
 	return nil
 }
