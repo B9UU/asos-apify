@@ -6,4 +6,4 @@ COPY . .
 RUN go mod download
 
 RUN go build -o /asos-scraper
-CMD ["asos-scraper"]
+CMD ["/asos-scraper"]
