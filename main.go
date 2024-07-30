@@ -23,6 +23,7 @@ type Scraper struct {
 	Token     string
 	DatasetId string
 	Items     int
+	mu        sync.Mutex
 	Payload
 }
 
@@ -41,7 +42,7 @@ func (i *Scraper) Input() error {
 }
 
 // TODO: need to handle payload more than 5MB
-func (i Scraper) Output(data AsosResp) error {
+func (i *Scraper) Output(data AsosResp) error {
 	url := fmt.Sprintf("https://api.apify.com/v2/datasets/%s/items?token=%s", i.DatasetId, i.Token)
 
 	dataM, err := json.Marshal(data.Products)
@@ -71,6 +72,8 @@ func (i Scraper) Output(data AsosResp) error {
 	for _, d := range data.Products {
 		fmt.Printf("%+v\n", d)
 	}
+	i.mu.Lock()
+	defer i.mu.Unlock()
 	i.Items += len(data.Products)
 	fmt.Println(i.Items, "Items Exported")
 	return nil
