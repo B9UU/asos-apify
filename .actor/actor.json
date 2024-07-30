@@ -8,7 +8,6 @@
             "actorSpecification": 1,
             "views": {
                 "overview": {
-                    "title": "Overview",
                     "transformation": {
                         "fields": [
                             "id",
