@@ -1,0 +1,128 @@
+{
+    "actorSpecification": 1,
+    "views": {
+        "overview": {
+            "title": "Overview",
+            "transformation": {
+                "fields": [
+                    "id",
+                    "name",
+                    "price",
+                    "colour",
+                    "colourWayId",
+                    "brandName",
+                    "hasVariantColours",
+                    "hasMultiplePrices",
+                    "groupId",
+                    "productCode",
+                    "productType",
+                    "url",
+                    "imageUrl",
+                    "additionalImageUrls",
+                    "videoUrl",
+                    "showVideo",
+                    "showVideo",
+                    "isSellingFast",
+                    "isRestockingSoon",
+                    "isPromotion",
+                    "sponsoredCampaignId",
+                    "facetGroupings",
+                    "advertisement"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "id": {
+                        "label": "Id",
+                        "format": "number"
+                    },
+                    "name": {
+                        "label": "Name",
+                        "format": "text"
+                    },
+                    "price": {
+                        "label": "Price",
+                        "format": "object"
+                    },
+                    "colour": {
+                        "label": "Colour",
+                        "format": "text"
+                    },
+                    "colourWayId": {
+                        "label": "Colour Id",
+                        "format": "number"
+                    },
+                    "brandName": {
+                        "label": "Brand Name",
+                        "format": "text"
+                    },
+                    "hasVariantColours": {
+                        "label": "hasVariantColours",
+                        "format": "boolean"
+                    },
+                    "hasMultiplePrices": {
+                        "label": "hasMultiplePrices",
+                        "format": "boolean"
+                    },
+                    "groupId": {
+                        "label": "groupId",
+                        "format": "text"
+                    },
+                    "productCode": {
+                        "label": "productCode",
+                        "format": "number"
+                    },
+                    "productType": {
+                        "label": "productType",
+                        "format": "text"
+                    },
+                    "url": {
+                        "label": "url",
+                        "format": "link"
+                    },
+                    "imageUrl": {
+                        "label": "imageUrl",
+                        "format": "image"
+                    },
+                    "additionalImageUrls": {
+                        "label": "additionalImageUrls",
+                        "format": "array"
+                    },
+                    "videoUrl": {
+                        "label": "videoUrl",
+                        "format": "link"
+                    },
+                    "showVideo": {
+                        "label": "showVideo",
+                        "format": "boolean"
+                    },
+                    "isSellingFast": {
+                        "label": "isSellingFast",
+                        "format": "boolean"
+                    },
+                    "isRestockingSoon": {
+                        "label": "isRestockingSoon",
+                        "format": "boolean"
+                    },
+                    "isPromotion": {
+                        "label": "isPromotion",
+                        "format": "boolean"
+                    },
+                    "sponsoredCampaignId": {
+                        "label": "sponsoredCampaignId",
+                        "format": "text"
+                    },
+                    "facetGroupings": {
+                        "label": "facetGroupings",
+                        "format": "array"
+                    },
+                    "advertisement": {
+                        "label": "advertisement",
+                        "format": "text"
+                    }
+                }
+            }
+        }
+    }
+}
