@@ -129,7 +129,10 @@ func Asos(q, offset, limit string) (AsosResp, error) {
 		return AsosResp{}, err
 	}
 	var dd AsosResp
-	json.NewDecoder(res.Body).Decode(&dd)
+	err = json.NewDecoder(res.Body).Decode(&dd)
+	if err != nil {
+		return nil, err
+	}
 	return dd, nil
 
 }
